@@ -1,0 +1,9 @@
+body { background: #0f172a; color: white; }
+.hero { background: #241e3b; }
+.card { background: #1e293b; color: white; border: 1px solid #334155; }
+.card:hover { transform: scale(1.01); transition: .3s; }
+.form-control { background: #0f2a26; color: white; border-color: #334155; }
+.form-control:focus { background: #0f172a; color: white; border-color: #6366f1; box-shadow: none; }
+.form-control::placeholder { color: #64748b; }
+pre { color: #94a3b8; font-size: .85rem; }
+.juego-card { background: #273549; border: 1px solid #333555; border-radius: 8px; }

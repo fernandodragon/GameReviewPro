@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GameReview Pro</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+<div class="container"><span class="navbar-brand"> GameReview Pro</span></div>
+</nav>
+
+<div class="hero text-center p-5">
+<h1>Reseñas y Tienda Gamer</h1>
+
+</div>
+
+<div class="container mt-4">
+<div class="row">
+<div class="col-md-4">
+<div class="card p-3">
+  <h4>Creacion de Usuario</h4>
+  <input id="nombre" class="form-control mb-2" placeholder="Nombre">
+  <input id="rut" class="form-control mb-2" placeholder="12345678-9">
+  <div id="errRut" class="text-danger small mb-2" style="display:none">⚠ RUT inválido (ej: 12345678-9)</div>
+  <button onclick="agregarUsuario()" class="btn btn-success">Guardar</button>
+</div>
+</div>
+
+<div class="col-md-8">
+<div class="card p-3">
+  <h4>Usuarios Registrados</h4>
+  <ul id="usuarios" class="list-unstyled"></ul>
+</div>
+</div>
+</div>
+
+<div class="card p-3 mt-3">
+<h4> Catálogo</h4>
+<div class="row g-2 mb-3">
+  <div class="col-6 col-md-3">
+    <div class="juego-card text-center p-2">
+      <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1672970/library_600x900.jpg"
+           alt="Minecraft" class="img-fluid rounded mb-1" style="height:100px;object-fit:cover;width:100%"
+           onerror="this.src='https://placehold.co/200x100/1e293b/6366f1?text=Minecraft'">
+      <div class="small fw-semibold">Minecraft</div>
+      <div class="small text-muted mb-1">$19.990</div>
+      <button class="btn btn-primary btn-sm w-100" onclick="agregarCarrito('Minecraft',19990)">Agregar</button>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="juego-card text-center p-2">
+      <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1811260/library_600x900.jpg"
+           alt="FIFA 24" class="img-fluid rounded mb-1" style="height:100px;object-fit:cover;width:100%"
+           onerror="this.src='https://placehold.co/200x100/1e293b/6366f1?text=FIFA+24'">
+      <div class="small fw-semibold">FIFA 24</div>
+      <div class="small text-muted mb-1">$29.990</div>
+      <button class="btn btn-primary btn-sm w-100" onclick="agregarCarrito('FIFA 24',29990)">Agregar</button>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="juego-card text-center p-2">
+      <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2519060/library_600x900.jpg"
+           alt="Call of Duty" class="img-fluid rounded mb-1" style="height:100px;object-fit:cover;width:100%"
+           onerror="this.src='https://placehold.co/200x100/1e293b/6366f1?text=Call+of+Duty'">
+      <div class="small fw-semibold">Call of Duty</div>
+      <div class="small text-muted mb-1">$39.990</div>
+      <button class="btn btn-primary btn-sm w-100" onclick="agregarCarrito('Call of Duty',39990)">Agregar</button>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="juego-card text-center p-2">
+      <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/library_600x900.jpg"
+           alt="GTA V" class="img-fluid rounded mb-1" style="height:100px;object-fit:cover;width:100%"
+           onerror="this.src='https://placehold.co/200x100/1e293b/6366f1?text=GTA+V'">
+      <div class="small fw-semibold">GTA V</div>
+      <div class="small text-muted mb-1">$24.990</div>
+      <button class="btn btn-primary btn-sm w-100" onclick="agregarCarrito('GTA V',24990)">Agregar</button>
+    </div>
+  </div>
+</div>
+<ul id="carrito"></ul>
+<h5>Total: $<span id="total">0</span></h5>
+<button onclick="vaciarCarrito()" class="btn btn-danger btn-sm mt-2">Vaciar carrito</button>
+</div>
+
+<div class="card p-3 mt-3">
+<h4> Calcular Edad</h4>
+<input type="date" id="fecha" class="form-control mb-2">
+<button onclick="calcularEdad()" class="btn btn-info">Calcular</button>
+<p id="edad"></p>
+</div>
+
+<div class="card p-3 mt-3">
+<h4> Encriptación</h4>
+<input id="texto" class="form-control mb-2" placeholder="Texto a encriptar">
+<button onclick="encriptar()" class="btn btn-warning">Encriptar</button>
+<button onclick="desencriptar()" class="btn btn-outline-warning ms-2">Desencriptar</button>
+<p id="resultado" class="mt-2 text-break"></p>
+</div>
+
+<div class="card p-3 mt-3">
+<h4> API Mindicador</h4>
+<input id="pesos" type="number" class="form-control mb-2" placeholder="Pesos CLP">
+<button onclick="consultarAPI()" class="btn btn-secondary">Convertir</button>
+<p id="api" class="mt-2"></p>
+</div>
+
+<div class="card p-3 mt-3">
+<h4> Diagrama de Clases</h4>
+<pre>
+┌─────────────┐       ┌─────────────┐       ┌──────────────┐
+│   Usuario   │ 1───* │   Reseña    │ *───1 │  Videojuego  │
+│─────────────│       │─────────────│       │──────────────│
+│ nombre      │       │ texto       │       │ nombre       │
+│ rut         │       │ puntuacion  │       │ precio       │
+│─────────────│       │─────────────│       │──────────────│
+│ guardar()   │       │ crear()     │       │ addCarrito() │
+│ eliminar()  │       │ encriptar() │       │ getPrecio()  │
+└─────────────┘       └─────────────┘       └──────────────┘
+</pre>
+</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
